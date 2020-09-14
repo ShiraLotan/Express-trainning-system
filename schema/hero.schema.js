@@ -10,7 +10,7 @@ const HeroSchema = new mongoose.Schema({
         required: true
     },
     guid_id: {
-        type: Number,
+        type: String,
         required: true
     },
     started: {

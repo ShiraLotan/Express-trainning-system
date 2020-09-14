@@ -3,9 +3,6 @@ var router = express.Router();
 
 require('../schema/users.schema');
 
-const mongoose = require('mongoose');
-const UserSchema = mongoose.model('Users');
-
 const {
     loginUser
 } = require('../queries/queries');

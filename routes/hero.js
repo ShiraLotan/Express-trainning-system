@@ -2,17 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 require('../schema/users.schema');
+require('../schema/hero.schema');
 
-const mongoose = require('mongoose');
-const UserSchema = mongoose.model('Users');
+
+const { addHero, findTrainerIdByMail, getHerosByTainerId } = require('../queries/queries');
 
 /* GET All Heros. */
-router.get('/', function(req, res, next) {
-  UserSchema.find((err,docs)=>{
-    if(!err){
-      res.json(docs)
-    }
-  })
+router.post('/all', async function(req, res, next) {
+    const trainerId = await findTrainerIdByMail(req.body.email);
+    const response = await getHerosByTainerId(trainerId);
+    res.json(response)
 });
+
+/*Add a hero*/
+router.post('/add', async function(req, res, next) {
+    const trainerId = await findTrainerIdByMail(req.body.email);
+    const response = addHero(req.body, trainerId);
+    res.json(response);
+    
+  });
 
 module.exports = router;
