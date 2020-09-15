@@ -8,8 +8,11 @@ const {
 } = require('../queries/queries');
 
 //Login
-router.post('/',async function (req, res, next) {
-    const message = await loginUser(req.body);
+router.post('/', async function (req, res, next) {
+    console.log(req.body)
+    const {
+        message
+    } = await loginUser(req.body);
     res.json(message)
 });
 

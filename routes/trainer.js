@@ -1,11 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+require('../schema/users.schema');
+require('../schema/hero.schema');
 
-/* Regiater a user */
-router.post('/register', function(req, res, next) {
-  
-  res.json(req.body)
+const { getAllTrainers } = require('../queries/queries');
+
+/* Get all users */
+router.get('/all',async function(req, res, next) {
+  const response = await getAllTrainers();
+  res.json(response)
  });
 
 

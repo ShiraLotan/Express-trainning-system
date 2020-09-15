@@ -10,6 +10,7 @@ var heroRouter = require('./routes/hero');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 
+var cors = require('cors');
 //Connect to DB
 require('./connectiom/db.connection');
 
@@ -18,6 +19,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
