@@ -17,14 +17,16 @@ module.exports = {
             const response = await UserSchema.findOne({
                 email
             }, {
-                password: 1
+                password: 1,
+                name: 1,
+                email
             });
             const plainPass = await checkPassword(response.password, password);
             if (plainPass) {
                 updateLogin(email)
-                return {
-                    message: 'LOGIN'
-                }
+
+                return response
+                
             } else {
                 return {
                     message: 'Not a match'
@@ -44,7 +46,7 @@ module.exports = {
     }) => {
         try {
             const response = await UserSchema.findOne({
-                email: email
+                email
             });
             if (response) {
                 return {
@@ -68,6 +70,18 @@ module.exports = {
                 message: err.message
             }
         }
+    },
+
+    logOutUser: async({email})=>{
+        const res = await UserSchema.update(
+            {email},
+            {
+                $set: {
+                    isSignin: false 
+                }
+            }
+        )
+        return res
     },
 
     getAllTrainers: async () => {
@@ -100,6 +114,16 @@ module.exports = {
             power_current: 1
         })
         return res
+    },
+
+    updateHeroPower: async({id})=>{
+       const res = await HeroSchema.updateOne({
+           _id: id
+       },{
+           $set:{
+            
+           }
+       }) 
     }
 }
 

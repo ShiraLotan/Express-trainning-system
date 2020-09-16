@@ -16,7 +16,7 @@ const HeroSchema = new mongoose.Schema({
     started: {
         type: Date,
         required: true,
-        default: new Date()
+        default: new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate())
     },
     suit: {
         type: String,
@@ -25,7 +25,7 @@ const HeroSchema = new mongoose.Schema({
     power_start: {
         type: Number,
         required: true,
-        default: 0
+        default: Math.floor(Math.random() * 10)
     },
     power_current: {
         type: Number,

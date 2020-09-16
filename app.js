@@ -9,6 +9,7 @@ var trainerRouter = require('./routes/trainer');
 var heroRouter = require('./routes/hero');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var logoutRouter = require('./routes/logout');
 
 var cors = require('cors');
 //Connect to DB
@@ -30,6 +31,7 @@ app.use('/', indexRouter);
 app.use('/trainer', trainerRouter);
 app.use('/hero', heroRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler

@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+require('../schema/users.schema');
+
 const {
-    registerUser
+    logOutUser
 } = require('../queries/queries');
 
-/* Regiater a user */
+//Logout
 router.post('/', async function (req, res, next) {
-    console.log(req.body)
-    const response = await registerUser(req.body);
-    res.json(response);
+    const response = await logOutUser(req.body);
+    res.json(response)
 });
 
 module.exports = router;
