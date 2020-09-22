@@ -117,13 +117,23 @@ module.exports = {
     },
 
     updateHeroPower: async({id})=>{
+        const powerObj = await HeroSchema.findOne({
+            _id: id
+        },{
+            power_start:1,
+            power_current: 1
+        })
+        const newPower = calculatePower(powerObj);
+        
        const res = await HeroSchema.updateOne({
            _id: id
        },{
            $set:{
-            
+            power_current: newPower
            }
        }) 
+
+       return powerObj;
     }
 }
 
@@ -135,4 +145,9 @@ const updateLogin = async (email) => {
             isSignin: true
         }
     })
+}
+
+const calculatePower = (powerObj)=>{
+    let powerSum = powerObj.power_current + powerObj.power_start + Math.floor(Math.random() * 10)+1;
+    return powerSum
 }

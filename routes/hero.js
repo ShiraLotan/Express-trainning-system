@@ -17,15 +17,16 @@ router.post('/all', async function(req, res, next) {
 /*Add a hero*/
 router.post('/add', async function(req, res, next) {
     const trainerId = await findTrainerIdByMail(req.body.email);
-    const response = addHero(req.body, trainerId);
+    const response = await addHero(req.body, trainerId);
     res.json(response);
     
   });
 
 /*Start practice*/
 router.post('/start', async function(req, res, next) {
-  const response = await updateHeroPower(req.body)
-  res.json({});
+  const response = await updateHeroPower(req.body);
+console.log(response)
+  res.json(response);
   
 });
 
